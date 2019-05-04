@@ -8,6 +8,10 @@ Bladerunner is aimed for embedded systems . It includes a distributed watch dog 
 
 # New Features!
 
+  - Watchdog - Under Development
+  - Local IPC Design - Planned
+  - Netork Layer Integration -Planned
+  - SSL Integration
   - TBD
 
 > TBD
