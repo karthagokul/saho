@@ -8,9 +8,9 @@ Saho is aimed for embedded systems . It includes a distributed watch dog & inter
 
 # New Features!
 
-  - (madarre) Watchdog - Under Development
+  - (ukal) Watchdog - Under Development
   - (rahbe) Local IPC Design - Planned
-  - Netork Layer Integration -Planned
+  - (madarre) Netork Layer Integration -Planned
   - SSL Integration
   - TBD
 
