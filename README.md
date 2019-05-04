@@ -17,7 +17,7 @@ Saho is aimed for embedded systems . It includes a distributed watch dog & inter
 > TBD
 
 ### Authors
-Gokul Kartha < kartha dot gokul at dmail dot com >
+Gokul Kartha < kartha dot gokul at gmail dot com >
 ### Installation
 
 TBD
