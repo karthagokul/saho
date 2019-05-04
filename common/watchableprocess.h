@@ -17,29 +17,20 @@
  *****************************************************************************/
 
 
-#include <iostream>
-#include "logger.h"
+#ifndef WATCHABLEPROCESS_H
+#define WATCHABLEPROCESS_H
 
-using namespace Saho::Common;
-structlog Saho::Common::LoggerConfig = {};
-
-int main()
+namespace Saho
 {
-  /*
-     *The logger is a place holder, I do not like the implemntation , For first version its okay
-  */
+  namespace Common
+  {
+    class WatchableProcess
+    {
+      public:
+        WatchableProcess();
+    };
 
-  std::shared_ptr<LogInterface> l=std::make_shared<BasicLogger>();
-  LoggerConfig.headers = true;
-  LoggerConfig.level = ALL_LOG_LEVEL;
-  LoggerConfig.logInterface=l;
-
-  //LOG_FUNCTION_NAME;
-  Logger(DEBUG) << "Hello Debug!";
-  Logger(WARN) << "Hello Warning!";
-  Logger(INFO) << "Hello Info!";
-  Logger(ERROR) << "Hello Error!";
-
-  return 0;
+  }
 }
 
+#endif // WATCHABLEPROCESS_H

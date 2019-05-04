@@ -17,30 +17,49 @@
  *****************************************************************************/
 
 
-#include "logger.h"
-#include <sstream>
+#include "clientsocket.h"
+#include "socketexception.h"
 
 namespace Saho
 {
-  namespace Common
+  namespace Utils
   {
-    Logger::Logger(typelog type)
+    ClientSocket::ClientSocket ( std::string host, int port )
     {
-      msglevel = type;
-      if(LoggerConfig.headers) {
-        operator << ("["+getLabel(type)+"]");
+      if ( ! Socket::create() )
+      {
+        throw SocketException ( "Could not create client socket." );
       }
+
+      if ( ! Socket::connect ( host, port ) )
+      {
+        throw SocketException ( "Could not bind to port." );
+      }
+
     }
 
-    Logger::~Logger() {
-      if(opened) {
-        if(LoggerConfig.logInterface)
-        {
-          LoggerConfig.logInterface->log("\n");
-        }
+
+    const ClientSocket& ClientSocket::operator << ( const std::string& s ) const
+    {
+      if ( ! Socket::send ( s ) )
+      {
+        throw SocketException ( "Could not write to socket." );
       }
-      opened = false;
+
+      return *this;
+
     }
 
+
+    const ClientSocket& ClientSocket::operator >> ( std::string& s ) const
+    {
+      if ( ! Socket::recv ( s ) )
+      {
+        throw SocketException ( "Could not read from socket." );
+      }
+
+      return *this;
+    }
   }
+
 }

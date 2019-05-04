@@ -17,29 +17,24 @@
  *****************************************************************************/
 
 
-#include <iostream>
-#include "logger.h"
+#include "watchdogapp.h"
 
-using namespace Saho::Common;
-structlog Saho::Common::LoggerConfig = {};
-
-int main()
+WatchDogApp::WatchDogApp()
 {
-  /*
-     *The logger is a place holder, I do not like the implemntation , For first version its okay
-  */
 
-  std::shared_ptr<LogInterface> l=std::make_shared<BasicLogger>();
-  LoggerConfig.headers = true;
-  LoggerConfig.level = ALL_LOG_LEVEL;
-  LoggerConfig.logInterface=l;
-
-  //LOG_FUNCTION_NAME;
-  Logger(DEBUG) << "Hello Debug!";
-  Logger(WARN) << "Hello Warning!";
-  Logger(INFO) << "Hello Info!";
-  Logger(ERROR) << "Hello Error!";
-
-  return 0;
 }
 
+bool WatchDogApp::start()
+{
+  return true;
+}
+
+bool WatchDogApp::stop()
+{
+  return true;
+}
+
+bool WatchDogApp::restart()
+{
+  return true;
+}

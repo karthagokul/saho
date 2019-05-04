@@ -17,29 +17,26 @@
  *****************************************************************************/
 
 
+#ifndef WATCHDOGAPP_H
+#define WATCHDOGAPP_H
+
 #include <iostream>
-#include "logger.h"
 
-using namespace Saho::Common;
-structlog Saho::Common::LoggerConfig = {};
-
-int main()
+struct Proess
 {
-  /*
-     *The logger is a place holder, I do not like the implemntation , For first version its okay
-  */
+    std::string name;
+    int beatInterval=2;
+};
 
-  std::shared_ptr<LogInterface> l=std::make_shared<BasicLogger>();
-  LoggerConfig.headers = true;
-  LoggerConfig.level = ALL_LOG_LEVEL;
-  LoggerConfig.logInterface=l;
 
-  //LOG_FUNCTION_NAME;
-  Logger(DEBUG) << "Hello Debug!";
-  Logger(WARN) << "Hello Warning!";
-  Logger(INFO) << "Hello Info!";
-  Logger(ERROR) << "Hello Error!";
+class WatchDogApp
+{
+  public:
+    WatchDogApp();
+    bool start();
+    bool stop();
+    bool restart();
 
-  return 0;
-}
+};
 
+#endif // WATCHDOGAPP_H

@@ -17,29 +17,32 @@
  *****************************************************************************/
 
 
-#include <iostream>
-#include "logger.h"
+#ifndef SERVERSOCKET_H
+#define SERVERSOCKET_H
 
-using namespace Saho::Common;
-structlog Saho::Common::LoggerConfig = {};
-
-int main()
+#include "socket.h"
+namespace Saho
 {
-  /*
-     *The logger is a place holder, I do not like the implemntation , For first version its okay
-  */
+  namespace Utils
+  {
+    class ServerSocket : private Socket
+    {
+      public:
 
-  std::shared_ptr<LogInterface> l=std::make_shared<BasicLogger>();
-  LoggerConfig.headers = true;
-  LoggerConfig.level = ALL_LOG_LEVEL;
-  LoggerConfig.logInterface=l;
+        ServerSocket ( int port );
+        ServerSocket (){};
+        virtual ~ServerSocket();
 
-  //LOG_FUNCTION_NAME;
-  Logger(DEBUG) << "Hello Debug!";
-  Logger(WARN) << "Hello Warning!";
-  Logger(INFO) << "Hello Info!";
-  Logger(ERROR) << "Hello Error!";
+        const ServerSocket& operator << ( const std::string& ) const;
+        const ServerSocket& operator >> ( std::string& ) const;
 
-  return 0;
+        void accept ( ServerSocket& );
+
+    };
+
+  }
+
 }
 
+
+#endif // SERVERSOCKET_H
