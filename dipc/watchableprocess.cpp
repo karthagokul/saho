@@ -20,7 +20,7 @@
 #include "watchableprocess.h"
 namespace Saho
 {
-  namespace Common
+  namespace Dipc
   {
     WatchableProcess::WatchableProcess()
     {

@@ -17,13 +17,34 @@
  *****************************************************************************/
 
 
+#ifndef WATCHABLEPROCESS_H
+#define WATCHABLEPROCESS_H
 
+#include <memory>
 #include <iostream>
+#include <map>
 
-using namespace std;
-
-int main()
+namespace Saho
 {
-    return 0;
+  namespace Dipc
+  {
+    struct Variable
+    {
+        std::string name;
+        std::shared_ptr<void> data;
+        std::string node;
+    };
+
+    class WatchableProcess
+    {
+      public:
+        WatchableProcess();
+
+      private:
+        std::map<std::string,std::unique_ptr<Variable> > sharedVariables;
+    };
+
+  }
 }
 
+#endif // WATCHABLEPROCESS_H
