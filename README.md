@@ -1,6 +1,6 @@
-# bladerunner
+# saho
 
-Bladerunner is aimed for embedded systems . It includes a distributed watch dog & interprocess communication mechanism over network .
+Saho is aimed for embedded systems . It includes a distributed watch dog & interprocess communication mechanism over network . The name has been inspired by https://en.wikipedia.org/wiki/Saho_people
 
   - Watchdog
   - Distributed IPC session over Secure Connection
@@ -8,8 +8,8 @@ Bladerunner is aimed for embedded systems . It includes a distributed watch dog 
 
 # New Features!
 
-  - Watchdog - Under Development
-  - Local IPC Design - Planned
+  - (madarre) Watchdog - Under Development
+  - (rahbe) Local IPC Design - Planned
   - Netork Layer Integration -Planned
   - SSL Integration
   - TBD
