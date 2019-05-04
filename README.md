@@ -1,6 +1,6 @@
 # saho
 
-Saho is aimed for embedded systems . It includes a distributed watch dog & interprocess communication mechanism over network . The name has been inspired by https://en.wikipedia.org/wiki/Saho_people
+Saho is aimed for embedded systems . It includes a distributed watch dog & interprocess communication mechanism over network . 
 
   - Watchdog
   - Distributed IPC session over Secure Connection
@@ -8,9 +8,9 @@ Saho is aimed for embedded systems . It includes a distributed watch dog & inter
 
 # New Features!
 
-  - (ukal) Watchdog - Under Development
-  - (rahbe) Local IPC Design - Planned
-  - (madarre) Netork Layer Integration -Planned
+  - Watchdog - Under Development
+  - Local IPC Design - Planned
+  - Netork Layer Integration -Planned
   - SSL Integration
   - TBD
 
