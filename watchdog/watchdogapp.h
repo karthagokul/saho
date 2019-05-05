@@ -44,11 +44,9 @@ class Runnable
     int pid;
     bool start();
     bool stop();
-
-    bool startthread();
 };
 
-typedef std::vector<Runnable> Runnables;
+typedef std::vector<std::shared_ptr<Runnable> > Runnables;
 
 class WatchDogApp
 {
@@ -59,7 +57,7 @@ class WatchDogApp
     bool restart();
 
   private:
-    Runnables r;
+    Runnables listofRunnable;
 
 };
 
