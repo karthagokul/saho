@@ -18,23 +18,37 @@
 
 #include <iostream>
 #include "logger.h"
-using namespace std;
+#include "watchdogapp.h"
+#include <unistd.h>
 
+using namespace std;
 using namespace Saho::Common;
 structlog Saho::Common::LoggerConfig = {};
+static WatchDogApp watchdog_app;
+
+void sig_handler(int signum)
+{
+  Logger(WARN)<<"Exiting app";
+  watchdog_app.stop();
+  exit(0);
+}
 
 int main()
 {
+  signal(SIGTERM, sig_handler);
+  signal(SIGINT, sig_handler);
+
   std::shared_ptr<LogInterface> l=std::make_shared<BasicLogger>();
   LoggerConfig.headers = true;
   LoggerConfig.level = ALL_LOG_LEVEL;
   LoggerConfig.logInterface=l;
 
-  //LOG_FUNCTION_NAME;
-  Logger(DEBUG) << "Hello Debug!";
-  Logger(WARN) << "Hello Warning!";
-  Logger(INFO) << "Hello Info!";
-  Logger(ERROR) << "Hello Error!";
+  watchdog_app.start();
+
+  while(1) //Watchdog event loop
+  {
+    sleep(1);
+  }
 
   return 0;
 }

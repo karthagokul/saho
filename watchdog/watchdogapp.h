@@ -21,13 +21,34 @@
 #define WATCHDOGAPP_H
 
 #include <iostream>
+#include <vector>
+#include <unistd.h>
 
-struct Proess
+#include <fstream>
+#include <memory>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+
+
+class Runnable
 {
+  public:
+    Runnable()
+    {
+    }
+    ~Runnable();
+    std::string path;
     std::string name;
-    int beatInterval=2;
+    std::vector<std::string> arguments;
+    int pid;
+    bool start();
+    bool stop();
+
+    bool startthread();
 };
 
+typedef std::vector<Runnable> Runnables;
 
 class WatchDogApp
 {
@@ -36,6 +57,9 @@ class WatchDogApp
     bool start();
     bool stop();
     bool restart();
+
+  private:
+    Runnables r;
 
 };
 

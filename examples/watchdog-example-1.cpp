@@ -20,7 +20,8 @@
 #include <iostream>
 #include "logger.h"
 #include "watchableprocess.h"
-
+#include "process.h"
+#include <unistd.h>
 using namespace Saho::Common;
 using namespace Saho::Dipc;
 structlog Saho::Common::LoggerConfig = {};
@@ -42,17 +43,24 @@ int main()
   LoggerConfig.level = ALL_LOG_LEVEL;
   LoggerConfig.logInterface=l;
 
-  DVariable<int> var(10);
-  var=11;
+  while(1)
+  {
+    //Process p;
+    sleep(3);
+  }
 
 
-/*  WatchableProcess w;
+  // DVariable<int> var(10);
+  // var=11;
+
+
+  /*  WatchableProcess w;
 
   std::string name="hello";
   std::shared_ptr<IpcInvoker1> invo1=std::make_shared<IpcInvoker1>();
   w.addInvokable(invo1);
   //w.hello();
 */
-return 0;
+  return 0;
 }
 

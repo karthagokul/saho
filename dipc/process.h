@@ -17,10 +17,24 @@
  *****************************************************************************/
 
 
-#include "processfactory.h"
+#ifndef PROCESSFACTORY_H
+#define PROCESSFACTORY_H
 
-ProcessFactory::ProcessFactory()
+#include <memory>
+#include <iostream>
+
+class ProcessInternal;
+class Process
 {
+  private:
+    std::unique_ptr<ProcessInternal> d;
+  public:
+    Process();
+    virtual ~Process();
+    void eventloop();
+    void send(const char *data); //to be changed the data type
+    void recive(const char *data); //to be changed the data type
+  };
 
-}
 
+#endif // PROCESSFACTORY_H

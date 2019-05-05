@@ -18,13 +18,46 @@
 
 
 #include "watchableprocess.h"
+#include "logger.h"
+
+using namespace Saho::Common;
+
 namespace Saho
 {
   namespace Dipc
   {
+
+    class WatchableProcessInternal
+    {
+      public :
+        WatchableProcessInternal();
+        bool addInvokable(std::shared_ptr<Invokable> aInvoker);
+      private:
+        //list of the Variables in the current node
+        std::map<std::string,std::unique_ptr<Invokable> > sharedVariables;
+    };
+
+    WatchableProcessInternal::WatchableProcessInternal()
+    {
+      Logger(DEBUG) << "Hello WatchableProcessInternal!";
+    }
+
+    bool WatchableProcessInternal::addInvokable(std::shared_ptr<Invokable> aInvoker)
+    {
+      aInvoker->execute();
+      return true;
+    }
+
+
     WatchableProcess::WatchableProcess()
+      :d(std::make_shared<WatchableProcessInternal>())
     {
 
+    }
+
+     bool WatchableProcess::addInvokable(std::shared_ptr<Invokable> aInvoker)
+    {
+      return d->addInvokable(aInvoker);
     }
 
   }

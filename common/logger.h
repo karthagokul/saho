@@ -112,6 +112,6 @@ namespace Saho
 #define DEBUG_LEVEL_1 1
 #define DEBUG_LEVEL_2 2
 #define DEBUG_LEVEL_3 3
-//#define LOG_FUNCTION_NAME { LOG(DEBUG,DEBUG_LEVEL_3) << __PRETTY_FUNCTION__;}
+#define LOG_FUNCTION_NAME { Saho::Common::Logger(Saho::Common::DEBUG) << __PRETTY_FUNCTION__;}
 
 #endif  /* GOLOGGER_H */
