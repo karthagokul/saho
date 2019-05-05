@@ -29,8 +29,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-
-
 class Runnable
 {
   public:
@@ -41,9 +39,10 @@ class Runnable
     std::string path;
     std::string name;
     std::vector<std::string> arguments;
-    int pid;
+    int pid=-1;
     bool start();
     bool stop();
+    bool isRunning=false;
 };
 
 typedef std::vector<std::shared_ptr<Runnable> > Runnables;

@@ -87,7 +87,8 @@ bool Runnable::start()
   LOG_FUNCTION_NAME;
   const char    *arg1[64] = {name.c_str(), NULL};
   exec_prog(arg1,pid);
-  //std::cout<<"PID IS "<<pid<<std::endl;
+  if(pid!=-1)
+    isRunning=true;
   return true;
 }
 
@@ -95,7 +96,11 @@ bool Runnable::start()
 bool Runnable::stop()
 {
   LOG_FUNCTION_NAME;
+
+  if(pid==-1)
+    return false;
   kill(pid,SIGQUIT);
+  isRunning=false;
   return true;
 }
 
@@ -115,15 +120,10 @@ bool WatchDogApp::start()
 {
   LOG_FUNCTION_NAME;
   std::shared_ptr<Runnable> r1=std::make_shared<Runnable>();
-  std::shared_ptr<Runnable> r2=std::make_shared<Runnable>();
-
   r1->name ="/home/gokul/workspace/saho-build/examples/examples-watchdog-1";
-  r2->name ="/home/gokul/workspace/saho-build/examples/examples-watchdog-1";
   r1->start();
-  r2->start();
 
   listofRunnable.push_back(r1);
-  listofRunnable.push_back(r2);
 
   return true;
 }

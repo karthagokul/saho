@@ -25,6 +25,82 @@
 #include <map>
 #include <functional>
 
+//Heartbeat
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <stdio.h>
+#include <cstring>
+
+#define HEARTBEAT_PORT 5555
+#define HEARTBEAT_SERVER "127.0.0.1"
+
+struct HeartBeatClient
+{
+    HeartBeatClient()
+    {
+
+    }
+    bool send()
+    {
+      int sock;
+      size_t length, n;
+      struct sockaddr_in server, from; // IP Addressing(ip, port, type) Stuff
+      struct hostent *hp; // DNS stuff
+      char buffer[256];
+      sock= socket(AF_INET, SOCK_DGRAM, 0);
+      if (sock < 0) return false;
+      server.sin_family = AF_INET;
+      hp = gethostbyname(HEARTBEAT_SERVER);
+      if (hp==0) return false;
+      bcopy((char *)hp->h_addr, (char *)&server.sin_addr, hp->h_length);
+      server.sin_port = htons(HEARTBEAT_PORT);
+      length=sizeof(struct sockaddr_in);
+      bzero(buffer,256);
+      strcpy(buffer,"HELLO");
+      n=sendto(sock,buffer,strlen(buffer),0, (struct sockaddr*)&server,length);
+      if (n < 0) return false;
+      return true;
+
+      //if return false, then something wrong with watch dog , exit from process itself.
+    }
+};
+
+
+struct HeartBeatServer
+{
+    HeartBeatServer()
+    {
+
+    }
+    bool recive()
+    {
+     unsigned  int sock, length, fromlen, n;
+      struct sockaddr_in server;
+      struct sockaddr_in from;
+      char buf[1024];
+      sock=socket(AF_INET, SOCK_DGRAM, 0);
+      if (sock < 0)return false;
+      length = sizeof(server);
+      bzero(&server,length);
+      server.sin_family=AF_INET;
+      server.sin_addr.s_addr=INADDR_ANY;
+      server.sin_port=htons(HEARTBEAT_PORT);
+      if (bind(sock,(struct sockaddr *)&server,length)<0)
+        return false;
+      fromlen = sizeof(struct sockaddr_in);
+      while (1) {
+        n = recvfrom(sock,buf,1024,0,(struct sockaddr *)&from,&fromlen);
+        if (n < 0) return false;
+        printf("Recived %s\n",buf);
+        bzero(&buf,0);
+      }
+      return true;
+    }
+};
+
 /* The D variable is the exposed variable in the system between the nodes, we need to keep track of the data change */
 
 template <class T>

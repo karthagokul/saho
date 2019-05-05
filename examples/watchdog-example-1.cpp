@@ -43,9 +43,10 @@ int main()
   LoggerConfig.level = ALL_LOG_LEVEL;
   LoggerConfig.logInterface=l;
 
+  Process p;
   while(1)
   {
-    //Process p;
+
     sleep(3);
   }
 
@@ -54,9 +55,9 @@ int main()
   // var=11;
 
 
-  /*  WatchableProcess w;
+  //  WatchableProcess w;
 
-  std::string name="hello";
+/*  std::string name="hello";
   std::shared_ptr<IpcInvoker1> invo1=std::make_shared<IpcInvoker1>();
   w.addInvokable(invo1);
   //w.hello();

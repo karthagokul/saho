@@ -20,7 +20,7 @@
 #include "logger.h"
 #include "watchdogapp.h"
 #include <unistd.h>
-
+#include "watchableprocess.h"
 using namespace std;
 using namespace Saho::Common;
 structlog Saho::Common::LoggerConfig = {};
@@ -44,6 +44,11 @@ int main()
   LoggerConfig.logInterface=l;
 
   watchdog_app.start();
+  HeartBeatServer s;
+  if(!s.recive())
+  {
+    Logger(ERROR)<<"Failed to recive hert beat";
+  }
 
   while(1) //Watchdog event loop
   {

@@ -23,7 +23,7 @@
 #include <unistd.h>
 #include <future>
 #include <atomic>
-
+#include "watchableprocess.h"
 class ProcessInternal;
 
 class ProcessHeartBeat
@@ -34,9 +34,13 @@ class ProcessHeartBeat
 
     void tick()
     {
+      HeartBeatClient c;
       while(isrunning)
       {
-        std::cout<<"Tick: "<<std::endl;
+        if(c.send())
+          std::cout<<"Tick: "<<std::endl;
+        else
+          std::cout<<"Failed to send Heartbeat"<<std::endl;
         sleep(10);
       }
       return;
